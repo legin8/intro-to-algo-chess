@@ -39,6 +39,7 @@ public class MoveFunction
         return moves;
     }
 
+
     void GetPawnMoves()
     {
         if (piece.Team == PlayerTeam.BLACK)
@@ -52,17 +53,10 @@ public class MoveFunction
             TileData dl = null;
             TileData dr = null;
 
-            if (IsOnBoard(diagLeft))            
-                dl = board.GetTileFromBoard(diagLeft);
-            
-            if (IsOnBoard(diagRight))            
-                dr = board.GetTileFromBoard(diagRight);            
-
-            if (dl != null && ContainsPiece(dl) && IsEnemy(dl))            
-                CheckAndStoreMove(diagLeft);
-            
-            if (dr != null && ContainsPiece(dr) && IsEnemy(dr))            
-                CheckAndStoreMove(diagRight);            
+            if (IsOnBoard(diagLeft)) dl = board.GetTileFromBoard(diagLeft);
+            if (IsOnBoard(diagRight)) dr = board.GetTileFromBoard(diagRight);
+            if (dl != null && ContainsPiece(dl) && IsEnemy(dl)) CheckAndStoreMove(diagLeft);
+            if (dr != null && ContainsPiece(dr) && IsEnemy(dr)) CheckAndStoreMove(diagRight);
         }
         else if (piece.Team == PlayerTeam.WHITE)
         {
@@ -75,19 +69,13 @@ public class MoveFunction
             TileData dl = null;
             TileData dr = null;
 
-            if (IsOnBoard(diagLeft))            
-                dl = board.GetTileFromBoard(diagLeft);            
-            
-            if (IsOnBoard(diagRight))            
-                dr = board.GetTileFromBoard(diagRight);            
-
-            if (dl != null && ContainsPiece(dl) && IsEnemy(dl))            
-                CheckAndStoreMove(diagLeft);
-
-            if (dr != null && ContainsPiece(dr) && IsEnemy(dr))            
-                CheckAndStoreMove(diagRight);            
+            if (IsOnBoard(diagLeft)) dl = board.GetTileFromBoard(diagLeft);
+            if (IsOnBoard(diagRight)) dr = board.GetTileFromBoard(diagRight);
+            if (dl != null && ContainsPiece(dl) && IsEnemy(dl)) CheckAndStoreMove(diagLeft);
+            if (dr != null && ContainsPiece(dr) && IsEnemy(dr)) CheckAndStoreMove(diagRight);
         }
     }
+
 
     void GetRookMoves()
     {
@@ -96,6 +84,7 @@ public class MoveFunction
         GenerateMove(9, new Vector2(1, 0));
         GenerateMove(9, new Vector2(-1, 0));
     }
+
 
     void GetKnightMoves()
     {
@@ -120,6 +109,7 @@ public class MoveFunction
         CheckAndStoreMove(move);
     }
 
+
     void GetBishopMoves()
     {
         GenerateMove(9, new Vector2(1, 1));
@@ -128,24 +118,26 @@ public class MoveFunction
         GenerateMove(9, new Vector2(-1, -1));
     }
 
+
     void GetQueenMoves()
     {
         GetBishopMoves();
         GetRookMoves();
     }
 
+
     void GetKingMoves()
     {
         for (int x = -1; x <= 1; x++)        
             for (int y = -1; y <= 1; y++)
             {
-                if (x == 0 && y == 0)                
-                    continue;
+                if (x == 0 && y == 0) continue;
                 
                 CheckAndStoreMove(new Vector2(position.x + x, position.y + y));
             }        
     }
     
+
     void GenerateMove(int limit, Vector2 direction)
     {
         for (int i = 1; i < limit; ++i)
@@ -153,14 +145,16 @@ public class MoveFunction
             Vector2 move = position + direction * i;
             if (IsOnBoard(move) && ContainsPiece(board.GetTileFromBoard(move)))
             {
-                if (IsEnemy(board.GetTileFromBoard(move)) && piece.Type != ChessPiece.PieceType.PAWN)                
+                if (IsEnemy(board.GetTileFromBoard(move)) && piece.Type != ChessPiece.PieceType.PAWN)
+                {
                     CheckAndStoreMove(move);
-                
+                }
                 break;
             }
             CheckAndStoreMove(move);
         }
     }
+
 
     void CheckAndStoreMove(Vector2 move)
     {
@@ -181,35 +175,30 @@ public class MoveFunction
         }
     }
 
+
     public MoveFunction(BoardManager board)
     {
         this.board = board;
     }
 
+
     bool IsOnBoard(Vector2 point)
     {
-        if (point.x >= 0 && point.y >= 0 && point.x < 8 && point.y < 8)        
-            return true;                        
-        
-        return false;        
+        if (point.x >= 0 && point.y >= 0 && point.x < 8 && point.y < 8) return true;
+        return false;
     }
+
 
     bool ContainsPiece(TileData tile)
     {
-        if (!IsOnBoard(tile.Position))        
-            return false;        
-
-        if (tile.CurrentPiece != null)        
-            return true;        
-                
+        if (!IsOnBoard(tile.Position)) return false;
+        if (tile.CurrentPiece != null) return true;
         return false;        
     }
 
     bool IsEnemy(TileData tile)
     {
-        if (piece.Team != tile.CurrentPiece.Team)        
-            return true;        
-                
-        return false;        
+        if (piece.Team != tile.CurrentPiece.Team) return true;     
+        return false;
     }
 }

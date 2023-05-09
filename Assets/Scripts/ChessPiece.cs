@@ -18,14 +18,8 @@ public class ChessPiece : MonoBehaviour
     [SerializeField] private PieceType type = PieceType.NONE;
     [SerializeField] private PlayerTeam team = PlayerTeam.NONE;
 
-    public PieceType Type
-    {
-        get{ return type; }
-    }
-    public PlayerTeam Team
-    {
-        get{ return team; }
-    }
+    public PieceType Type { get{ return type; } }
+    public PlayerTeam Team { get{ return team; } }
     public Vector2 chessPosition;
     private Vector2 moveTo;
 

@@ -1,12 +1,4 @@
-﻿/* Program name: intro-to-algo-chess
-Project file name: BoardManager.cs
-Date: 3/5/23
-Language: C#
-Platform: Unity/ VS Code
-Purpose: Assessment
-Description: This contains the logic for setting up the board
-*/
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +9,13 @@ public class BoardManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)        
-            instance = this;        
-        else if (instance != this)        
-            Destroy(this);    
+        if (instance == null)
+        {
+            instance = this;
+        } else if (instance != this)
+        {
+            Destroy(this);
+        }
     }  
 
     private TileData[,] board = new TileData[8, 8];
