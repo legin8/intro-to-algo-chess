@@ -1,6 +1,5 @@
 ﻿/* Program name: intro-to-algo-chess
 Project file name: BoardManager.cs
-Author: Nigel Maynard
 Date: 3/5/23
 Language: C#
 Platform: Unity/ VS Code

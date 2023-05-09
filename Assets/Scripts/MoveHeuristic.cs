@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/* Program name: intro-to-algo-chess
+Project file name: MoveHeuristic.cs
+Author: Nigel Maynard
+Date: 10/5/23
+Language: C#
+Platform: Unity/ VS Code
+Purpose: Assessment
+Description: holds the method that returns the value of each piece
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

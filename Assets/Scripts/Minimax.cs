@@ -1,3 +1,12 @@
+/* Program name: intro-to-algo-chess
+Project file name: Minimax.cs
+Author: Nigel Maynard
+Date: 10/5/23
+Language: C#
+Platform: Unity/ VS Code
+Purpose: Assessment
+Description: This contains the logic for picking what to move.
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,32 +26,19 @@ public class Minimax : MonoBehaviour
     MoveHeuristic weight = new MoveHeuristic();
 
     public static Minimax instance;
-    public static Minimax Instance
-    {
-        get { return instance; }
-    }
+    public static Minimax Instance { get { return instance; } }
+
 
     private void Awake()
     {
-        if (instance == null)        
-            instance = this;        
-        else if (instance != this)        
-            Destroy(this);    
+        if (instance == null)
+        {
+            instance = this;
+            return;
+        }
+            
+        if (instance != this) Destroy(this);    
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
 
     MoveData CreateMove(TileData from, TileData to)

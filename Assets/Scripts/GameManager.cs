@@ -28,10 +28,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)        
-            instance = this;        
-        else if (instance != this)        
-            Destroy(this);    
+        if (instance == null)
+        {
+            instance = this;
+        }
+            
+        if (instance != this) Destroy(this);    
     }    
 
     void Start()
@@ -48,14 +50,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DoAIMove()
     {       
-        if(isCoroutineExecuting)
-            yield break;
+        if(isCoroutineExecuting) yield break;
 
         isCoroutineExecuting = true;
 
-        if (kingDead)                    
-            Debug.Log(playerTurn + " wins!");        
-        else if (!kingDead)
+        if (kingDead) Debug.Log(playerTurn + " wins!");
+            
+        if (!kingDead)
         {                     
             MoveData move = minimax.GetMove();
         
@@ -64,13 +65,13 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1);
             
-            SwapPieces(move);  
-            if(!kingDead)                
-                UpdateTurn();     
+            SwapPieces(move);
+            if(!kingDead) UpdateTurn();
 
-            isCoroutineExecuting = false;                                                                                                         
+            isCoroutineExecuting = false;                                                                                                      
         }
     }
+
 
     public void SwapPieces(MoveData move)
     {
@@ -95,10 +96,12 @@ public class GameManager : MonoBehaviour
     void CheckDeath(TileData _secondTile)
     {
         if (_secondTile.CurrentPiece != null)        
-            if (_secondTile.CurrentPiece.Type == ChessPiece.PieceType.KING)           
-                kingDead = true;                           
-            else
+            if (_secondTile.CurrentPiece.Type == ChessPiece.PieceType.KING)
+            {
+                kingDead = true;
+            } else {
                 Destroy(_secondTile.CurrentPiece.gameObject);        
+            }
     }
 
     void ShowMove(MoveData move)
@@ -116,6 +119,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag(text);
         foreach (GameObject GO in objects)
-            Destroy(GO);        
+        {
+            Destroy(GO);
+        }
     }
 }
